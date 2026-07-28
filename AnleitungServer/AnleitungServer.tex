@@ -1,0 +1,140 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{geometry}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\definecolor{uniblue}{RGB}{0, 90, 160}
+\definecolor{terminalbg}{RGB}{30, 30, 30}
+\definecolor{terminalheader}{RGB}{50, 50, 50}
+\definecolor{promptgreen}{RGB}{78, 154, 6}
+\definecolor{promptblue}{RGB}{52, 101, 164}
+\definecolor{warnred}{RGB}{204, 0, 0}
+\definecolor{warnbg}{RGB}{255, 240, 240}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=uniblue,
+	urlcolor=uniblue
+}
+
+\newcommand{\macbuttons}{%
+	\tikz[baseline=-0.6ex]{
+		\fill[red!80!white] (0,0) circle (3.5pt);
+		\fill[yellow!90!white] (0.4,0) circle (3.5pt);
+		\fill[green!80!white] (0.8,0) circle (3.5pt);
+	}%
+}
+
+\newtcolorbox{terminalbox}[1][]{
+	enhanced,
+	colback=terminalbg,
+	colframe=terminalheader,
+	colbacktitle=terminalheader,
+	coltext=white,
+	fontupper=\ttfamily\small,
+	arc=6pt,
+	boxrule=1pt,
+	toptitle=4pt, bottomtitle=4pt,
+	left=12pt, right=12pt, top=10pt, bottom=10pt,
+	title={\macbuttons\hspace*{0.5cm}\textcolor{gray!40}{\textsf{\textbf{#1}}}},
+	drop shadow={black!30}
+}
+
+\newcommand{\prompt}{\textcolor{promptgreen}{student@linux} \textcolor{promptblue}{\char`\~ \$} }
+
+\newtcolorbox{infobox}[1][Wichtiger Hinweis]{
+	enhanced,
+	colback=warnbg,
+	colframe=warnred,
+	borderline west={4pt}{0pt}{warnred}, 
+	fonttitle=\bfseries\sffamily,
+	title={#1},
+	coltitle=warnred,
+	attach title to upper,
+	after title={\\[0.5em]},
+	boxrule=0pt,
+	arc=3pt,
+	left=12pt, right=12pt, top=8pt, bottom=8pt
+}
+
+\newcommand{\step}[2]{
+	\vspace{0.6cm}
+	\noindent\fcolorbox{uniblue}{uniblue}{\textcolor{white}{\textbf{\textsf{ #1 }}}} \textcolor{uniblue}{\textbf{\Large #2}}
+	\vspace{0.2cm}\newline
+}
+
+\begin{document}
+	
+	\begin{center}
+		{\Huge \textbf{\textsf{\textcolor{uniblue}{CrypTool 2 Web-Umgebung}}}}\\[0.3cm]
+		{\large \textsf{Verbindungs- und Nutzungsanleitung}}\\[0.4cm]
+		\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+	\end{center}
+	Diese Anleitung richtet sich an alle, auf deren Geräten die Cryptool-sh Installation nicht funktioniert darunter Chromebooks, ARM-Prozessoren (z. B. macOS).
+	
+	\step{Schritt 1}{Verbindung zum Server aufbauen}
+	In die Adressleiste des Browsers \href{https://132.199.121.49/}{\texttt{https://132.199.121.49/}} eingeben. Sicherheitswarnung müssen eventuell, durch Aufruf des Buttons „Erweiterte Optionen“ umgangen werden. Danach die gelb markierte Schaltfläche bestätigen.
+	
+	\vspace{0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{/home/waznypatrick/Cryptool2/Dokumentation/Bilder/sicherheitswarung_https.png}
+	\end{center}
+	\vspace{0.3cm}
+	
+	\begin{infobox}[]
+		Falls die Website keine Daten sendet: Überprüfen ob Adresse mit https:// beginnt.
+	\end{infobox}
+	\step{Schritt 2}{Beim Server anmelden}
+	\begin{itemize}
+		\item \textbf{Benutzer:} Nach Git hochladen
+		\item \textbf{Passwort:} Nach Git hochladen
+	\end{itemize}
+	\step{Schritt 3}{Eigene Session starten}
+	\begin{itemize}
+		\item Button in der Mitte \textbf{„Cryptool 2“} auswählen.
+		\item Starten und kurz warten.
+	\end{itemize}
+	
+	\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+	
+	\step{Schritt 4}{Dateien importieren}
+	\begin{minipage}[c]{0.55\textwidth}
+		\begin{itemize}
+			\item Markierten Pfeil anklicken, um das Menü zu öffnen.
+			\item Hochladen auswählen und Dateien auswählen.
+			\item Danach in Cryptool Öffnen wählen.
+			\item Den Ordner Uploads auswählen.
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.4\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{/home/waznypatrick/Cryptool2/Dokumentation/Bilder/importiere_datei.png}
+		\end{center}
+	\end{minipage}
+	\vspace{0.3cm}
+	
+	\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+	
+	\step{Schritt 5}{Dateien exportieren}
+	\begin{itemize}
+		\item In Cryptool Speichern wählen.
+		\item Die Datei im Ordner Downloads speichern.
+		\item Kasm Menü öffnen.
+		\item Markierten Pfeil anklicken, um das Menü zu öffnen.
+		\item Hier Herunterladen auswählen.
+	\end{itemize}
+	
+\end{document}
