@@ -1,0 +1,140 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{geometry}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\definecolor{uniblue}{RGB}{0, 90, 160}
+\definecolor{terminalbg}{RGB}{30, 30, 30}
+\definecolor{terminalheader}{RGB}{50, 50, 50}
+\definecolor{promptgreen}{RGB}{78, 154, 6}
+\definecolor{promptblue}{RGB}{52, 101, 164}
+\definecolor{warnred}{RGB}{204, 0, 0}
+\definecolor{warnbg}{RGB}{255, 240, 240}
+
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=uniblue,
+	urlcolor=uniblue
+}
+
+\newcommand{\macbuttons}{%
+	\tikz[baseline=-0.6ex]{
+		\fill[red!80!white] (0,0) circle (3.5pt);
+		\fill[yellow!90!white] (0.4,0) circle (3.5pt);
+		\fill[green!80!white] (0.8,0) circle (3.5pt);
+	}%
+}
+
+\newtcolorbox{terminalbox}[1][]{
+	enhanced,
+	colback=terminalbg,
+	colframe=terminalheader,
+	colbacktitle=terminalheader,
+	coltext=white,
+	fontupper=\ttfamily\small,
+	arc=6pt,
+	boxrule=1pt,
+	toptitle=4pt, bottomtitle=4pt,
+	left=12pt, right=12pt, top=10pt, bottom=10pt,
+	title={\macbuttons\hspace*{0.5cm}\textcolor{gray!40}{\textsf{\textbf{#1}}}},
+	drop shadow={black!30}
+}
+
+\newcommand{\prompt}{\textcolor{promptgreen}{student@linux} \textcolor{promptblue}{\char`\~ \$} }
+
+\newtcolorbox{infobox}[1][Wichtiger Hinweis]{
+	enhanced,
+	colback=warnbg,
+	colframe=warnred,
+	borderline west={4pt}{0pt}{warnred}, 
+	fonttitle=\bfseries\sffamily,
+	title={#1},
+	coltitle=warnred,
+	attach title to upper,
+	after title={\\[0.5em]},
+	boxrule=0pt,
+	arc=3pt,
+	left=12pt, right=12pt, top=8pt, bottom=8pt
+}
+
+\newcommand{\step}[2]{
+	\vspace{0.6cm}
+	\noindent\fcolorbox{uniblue}{uniblue}{\textcolor{white}{\textbf{\textsf{ #1 }}}} \textcolor{uniblue}{\textbf{\Large #2}}
+	\vspace{0.2cm}\newline
+}
+\begin{document}
+	
+	\begin{center}
+		{\Huge \textbf{\textsf{\textcolor{uniblue}{CrypTool 2 auf Linux}}}}\\[0.3cm]
+		{\large \textsf{Installations- und Startanleitung}}\\[0.4cm]
+		\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+	\end{center}
+	Diese Anleitung führt dich Schritt für Schritt durch den Download, die Installation und den Startprozess von CrypTool 2 unter Linux.
+	
+	\step{Schritt 1}{ZIP-Datei herunterladen}
+	Lade das ZIP-Archiv aus dem Kurs (in Grips) herunter und warte, bis der Download vollständig abgeschlossen ist.\\
+	\textbf{Direktlink:} \href{https://grips-link.de}{\texttt{https://grips-link.de}}
+	
+	\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+	
+	\step{Schritt 2}{Archiv entpacken}
+	In deinem Downloads-Ordner befindet sich nun ein .zip-Archiv. \\
+	\textbf{Variante A:} Entpacke die Datei mit einem Doppelklick oder Rechtsklick $\rightarrow$ „Hier entpacken“. Öffne den neuen Cryptool2-Ordner. \\
+	\textbf{Variante B:} Wenn du direkt im Terminal arbeitest, kannst du das Archiv mit folgenden Befehlen entpacken und den Ordner betreten:
+	
+	\begin{terminalbox}[]
+		\prompt cd \textasciitilde/Downloads\\
+		\prompt unzip Cryptool2.zip -d Cryptool2\\
+		\prompt cd Cryptool2
+	\end{terminalbox}
+	
+		\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+		
+	\step{Schritt 3}{Startdatei ausführen}
+	Um die Installation anzustoßen, muss das Skript cryptool.sh ausgeführt werden. \\\textbf{Variante A:} Starte die Datei mit einem Rechtsklick $\rightarrow$ „Auführbare Datei starten“. \\
+	\textbf{Variante B:} Direkt im Terminal:
+	
+	\begin{terminalbox}[]
+		\prompt ./cryptool.sh
+	\end{terminalbox}
+	
+	\begin{infobox}[Fehlende Berechtigungen?]
+		Falls die Fehlermeldung „Keine Berechtigung“ (Permission denied) auftaucht, fehlen der Datei die nötigen Ausführungsrechte. Führe deshalb im Terminal folgendes aus:
+		\vspace{0.2cm}
+		\begin{terminalbox}[]
+			\prompt chmod +x ./cryptool.sh\\
+			\prompt ./cryptool.sh
+		\end{terminalbox}
+	\end{infobox}
+
+	\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+
+	\step{Schritt 4}{Installation abschließen}
+	Verfolge nun die Ausgaben im Terminal. Das Skript richtet Wine, Winetricks und alle benötigten Bibliotheken automatisch ein. 
+	
+	\begin{itemize}
+		\item \textbf{Bestätigungen:} Sollte der Paketmanager nachfragen, bestätige mit y.
+		\item \textbf{Passworteingabe:} Da Systempakete installiert werden, fragt das Terminal nach deinem Linux-Benutzerpasswort. Tippe das Passwort einfach ein und drücke Enter.
+	\end{itemize}
+	Dieser Prozess kann einige Minuten in Anspruch nehmen und auch Fehler schmeißen (einfach ignorieren lol)
+	Sobald der Prozess durchgelaufen ist, startet CrypTool 2 automatisch. Sollte dies nicht passieren, führe ./cryptool.sh einfach noch einmal aus.
+	
+	\noindent\textcolor{uniblue}{\rule{\textwidth}{1.5pt}}
+	\vspace{0.2cm}
+	
+	\textbf{\Large \textcolor{uniblue}{Zukünftiges Starten von CrypTool 2}} \\\\
+	Jedes Mal, wenn du CrypTool 2 neu starten möchtest, musst du die cryptool2 einfach nur erneut ausführen. Das System erkennt automatisch, dass bereits alles installiert ist, überspringt das Setup und startet die Software direkt.
+	
+\end{document}
